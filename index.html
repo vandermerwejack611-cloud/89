@@ -1,35 +1,268 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-US">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hero Design V3 - Bain-Inspired Progress Slider</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+    <title>Africa's Leading CSI News | Simphiwe Mtetwa</title>
+
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+
+    <!-- Google Fonts: DM Serif Display & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        /* ============================================
+           SIMPHIWE MTETWA - REBRANDED DESIGN SYSTEM
+           Inspired by Rechtdoorzee (High-End, Editorial, Dark)
+           ============================================ */
+
         :root {
-            --primary-green: #1a4d3e;
-            --lime-green: #c4d82e;
-            --white: #ffffff;
+            --bg-dark: #0a0a0a;
+            --bg-card: #151515;
+            --text-main: #f4f4f5;
+            --text-muted: #a1a1aa;
+            --accent-lime: #c4d82e;
+            --accent-lime-hover: #b5cc28;
+            --radius-pill: 100px;
+            --radius-card: 40px;
+            --font-serif: 'DM Serif Display', serif;
+            --font-sans: 'Inter', sans-serif;
+            --nav-height: 80px;
         }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: 'Inter', sans-serif;
-            background: #000;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
-        .hero-section {
-            position: relative;
-            height: 100vh;
-            min-height: 600px;
-            overflow: hidden;
-            background: #000;
+        /* Typography */
+        h1, h2, h3, h4, h5 {
+            font-family: var(--font-serif);
+            font-weight: 400;
+            line-height: 1.1;
+            margin-bottom: 20px;
         }
 
-        .hero-slider {
+        h1 { font-size: clamp(48px, 8vw, 100px); letter-spacing: -1px; }
+        h2 { font-size: clamp(40px, 5vw, 64px); letter-spacing: -0.5px; }
+        h3 { font-size: clamp(28px, 4vw, 48px); }
+
+        .italic-accent {
+            font-style: italic;
+            color: var(--text-muted);
+        }
+
+        .kicker {
+            font-family: var(--font-sans);
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent-lime);
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .kicker-pill {
+            display: inline-block;
+            padding: 8px 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: var(--radius-pill);
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 30px;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 32px;
+            border-radius: var(--radius-pill);
+            font-family: var(--font-sans);
+            font-size: 15px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .btn-primary {
+            background: var(--accent-lime);
+            color: var(--bg-dark);
+            border: 1px solid var(--accent-lime);
+        }
+
+        .btn-primary:hover {
+            background: var(--text-main);
+            border-color: var(--text-main);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-main);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--text-main);
+            background: var(--text-main);
+            color: var(--bg-dark);
+            transform: translateY(-2px);
+        }
+
+        .icon-circle {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s;
+        }
+        
+        .btn:hover .icon-circle {
+            transform: rotate(45deg);
+        }
+
+        /* Floating Navigation */
+        .floating-header {
+            position: fixed;
+            top: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 1200px;
+            height: 70px;
+            background: rgba(20, 20, 20, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: var(--radius-pill);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+            z-index: 1000;
+            transition: all 0.4s ease;
+        }
+
+        .floating-header.scrolled {
+            top: 15px;
+            background: rgba(10, 10, 10, 0.85);
+            width: 95%;
+        }
+
+        .nav-logo img {
+            height: 32px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-lime);
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .menu-toggle {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .menu-toggle:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .menu-toggle span {
+            width: 16px;
+            height: 2px;
+            background: var(--text-main);
+            transition: all 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 200px 5% 100px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
             position: relative;
+        }
+
+        .hero-title-wrap {
+            max-width: 1000px;
+            z-index: 2;
+            position: relative;
+        }
+
+        .hero-media {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(10,10,10,0.9) 0%, rgba(10,10,10,0.4) 50%, var(--bg-dark) 100%);
+            z-index: 1;
         }
 
         .hero-slide {
@@ -39,7 +272,7 @@
             width: 100%;
             height: 100%;
             opacity: 0;
-            transition: opacity 1s ease-in-out;
+            transition: opacity 1.5s ease-in-out;
             z-index: 1;
         }
 
@@ -48,261 +281,385 @@
             z-index: 2;
         }
 
-        /* Ken Burns Effect */
         .hero-slide img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 6s ease;
+            filter: brightness(0.75);
+            transform: scale(1.1);
+            transition: transform 6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
         .hero-slide.active img {
-            transform: scale(1.1);
+            transform: scale(1);
         }
 
-        .hero-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
+        /* Editorial Split Section */
+        .editorial-split {
+            padding: 120px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .editorial-img {
+            border-radius: var(--radius-card);
+            overflow: hidden;
+            height: 700px;
+        }
+
+        .editorial-img img {
             width: 100%;
             height: 100%;
-            display: flex;
-            align-items: center;
-            background: linear-gradient(to right, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.3) 50%, transparent 100%);
-            z-index: 3;
+            object-fit: cover;
         }
 
-        .hero-content {
-            max-width: 1100px;
-            padding: 0 5vw 0 10vw;
-            text-align: left;
+        .editorial-content p {
+            font-size: 20px;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            max-width: 500px;
+        }
+
+        /* Horizontal Testimonials (Rechtdoorzee Style) */
+        .testimonial-section {
+            padding: 120px 0;
+            overflow: hidden;
+            background: var(--bg-card);
+            border-radius: var(--radius-card);
+            margin: 0 2%;
+        }
+
+        .testimonial-header {
+            padding: 0 5%;
+            margin-bottom: 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .testimonial-slider-wrapper {
+            position: relative;
+            padding-left: 5%;
             width: 100%;
         }
 
-        .hero-tag {
-            display: inline-block;
-            font-size: 13px;
-            font-weight: 700;
-            color: var(--lime-green);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 20px;
-        }
-
-        .hero-title {
-            font-size: clamp(32px, 5vw, 72px);
-            font-weight: 800;
-            color: var(--white);
-            font-family: 'Montserrat', sans-serif;
-            line-height: 1.1;
-            margin-bottom: 30px;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 16px 34px;
-            border-radius: 30px;
-            font-size: 14.5px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-decoration: none;
-        }
-
-        .btn-outline {
-            background: transparent;
-            color: var(--white);
-            border: 2px solid var(--white);
-        }
-
-        .btn-outline:hover {
-            background: var(--white);
-            color: var(--primary-green);
-        }
-
-        /* Hero Tabs with Progress */
-        .hero-tabs {
-            position: absolute;
-            bottom: 50px;
-            left: 10vw;
-            right: 10vw;
+        .testimonial-track {
             display: flex;
             gap: 30px;
-            z-index: 100;
+            transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+            cursor: grab;
         }
 
-        .hero-tab {
-            flex: 1;
-            padding-top: 15px;
-            border-top: 2px solid rgba(255, 255, 255, 0.2);
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 12px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            cursor: pointer;
-            transition: all 0.3s;
-            position: relative;
+        .testimonial-track:active {
+            cursor: grabbing;
         }
 
-        .hero-tab.active {
-            color: #fff;
-        }
-
-        .tab-progress {
-            position: absolute;
-            top: -2px;
-            left: 0;
-            height: 2px;
-            background: var(--lime-green);
-            width: 0%;
-        }
-
-        .hero__scroll-indicator {
-            position: absolute;
-            bottom: 40px;
-            right: 50px;
-            color: white;
+        .testimonial-card {
+            flex: 0 0 70vw;
+            max-width: 900px;
+            background: var(--bg-dark);
+            border-radius: 32px;
+            padding: 60px;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            gap: 10px;
-            z-index: 100;
-            animation: bounce 2s infinite;
+            justify-content: space-between;
+            min-height: 400px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
-            40% {transform: translateY(5px);}
-            60% {transform: translateY(3px);}
+        .testimonial-quote {
+            font-family: var(--font-serif);
+            font-size: clamp(24px, 3vw, 36px);
+            line-height: 1.3;
+            margin-bottom: 40px;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .author-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .author-info h4 {
+            font-family: var(--font-sans);
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .author-info p {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        /* Custom Slider Controls */
+        .slider-controls {
+            display: flex;
+            gap: 15px;
+        }
+
+        .slider-btn {
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: transparent;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .slider-btn:hover {
+            background: var(--text-main);
+            color: var(--bg-dark);
+        }
+
+        /* Large CTA Footer */
+        .massive-cta {
+            padding: 150px 5%;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .massive-cta h2 {
+            font-size: clamp(50px, 10vw, 140px);
+            margin-bottom: 40px;
+            white-space: nowrap;
+        }
+
+        /* Animations */
+        @keyframes slideUpFade {
+            0% { opacity: 0; transform: translateY(40px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 1024px) {
+            .nav-links { display: none; }
+            .editorial-split { grid-template-columns: 1fr; gap: 40px; }
+            .editorial-img { height: 400px; }
+            .testimonial-card { flex: 0 0 85vw; padding: 40px; }
+            .testimonial-header { flex-direction: column; align-items: flex-start; gap: 20px; }
         }
     </style>
 </head>
+
 <body>
 
-    <section class="hero-section">
-        <div class="hero-slider">
-            <!-- Slide 1 -->
+    <!-- Floating Glass Header -->
+    <header class="floating-header" id="mainHeader">
+        <a href="#" class="nav-logo">
+            <img src="https://www.image2url.com/r2/default/images/1777216092994-c7e885df-05b1-48e6-b802-69a615cb8fff.png" alt="Simphiwe Mtetwa">
+        </a>
+        
+        <ul class="nav-links">
+            <li><a href="#">Expertise</a></li>
+            <li><a href="#">Think Tank</a></li>
+            <li><a href="#">Podcast</a></li>
+            <li><a href="#">Magazine</a></li>
+        </ul>
+
+        <div class="nav-right">
+            <a href="#" class="btn btn-outline" style="padding: 10px 24px; font-size: 13px;">Contact</a>
+            <div class="menu-toggle">
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-media">
             <div class="hero-slide active">
-                <img src="https://simphiwemtetwa.africa/wp-content/uploads/2026/04/SIMPHIWE-MTETWA-1920-x-825-mm-12-scaled.jpg" alt="Inequality">
-                <div class="hero-overlay">
-                    <div class="hero-content">
-                        <span class="hero-tag">Social Justice</span>
-                        <h1 class="hero-title">
-                            Why Inequality Persists:<br>
-                            The Unspoken Deal
-                        </h1>
-                        <a href="#" class="btn btn-outline">Read more</a>
-                    </div>
-                </div>
+                <img src="https://simphiwemtetwa.africa/wp-content/uploads/2026/04/SIMPHIWE-MTETWA-1920-x-825-mm-10-scaled.jpg" alt="Simphiwe Vision 1">
             </div>
-
-            <!-- Slide 2 -->
             <div class="hero-slide">
-                <img src="https://simphiwemtetwa.africa/wp-content/uploads/2026/04/SIMPHIWE-MTETWA-1920-x-825-mm-10-scaled.jpg" alt="Vision 2052">
-                <div class="hero-overlay">
-                    <div class="hero-content">
-                        <span class="hero-tag">Strategic Vision</span>
-                        <h1 class="hero-title">
-                            A 25-Year Vision<br>
-                            in Motion
-                        </h1>
-                        <a href="#" class="btn btn-outline">Explore Vision</a>
-                    </div>
-                </div>
+                <img src="https://simphiwemtetwa.africa/wp-content/uploads/2026/04/SIMPHIWE-MTETWA-1920-x-825-mm-11-scaled.jpg" alt="Simphiwe Vision 2">
             </div>
-
-            <!-- Slide 3 -->
             <div class="hero-slide">
-                <img src="https://simphiwemtetwa.africa/wp-content/uploads/2026/04/SIMPHIWE-MTETWA-1920-x-825-mm-11-scaled.jpg" alt="Podcast">
-                <div class="hero-overlay">
-                    <div class="hero-content">
-                        <span class="hero-tag">Podcast</span>
-                        <h1 class="hero-title">
-                            Conversations That<br>
-                            Shape The Future
-                        </h1>
-                        <a href="#" class="btn btn-outline">Listen Now</a>
-                    </div>
-                </div>
+                <img src="https://simphiwemtetwa.africa/wp-content/uploads/2026/04/SIMPHIWE-MTETWA-1920-x-825-mm-12-scaled.jpg" alt="Simphiwe Vision 3">
             </div>
         </div>
+        <div class="hero-overlay"></div>
 
-        <div class="hero-tabs">
-            <div class="hero-tab active">
-                <div class="tab-progress"></div>
-                Social Justice
-            </div>
-            <div class="hero-tab">
-                <div class="tab-progress"></div>
-                Strategic Vision
-            </div>
-            <div class="hero-tab">
-                <div class="tab-progress"></div>
-                Podcast
-            </div>
-        </div>
-
-        <div class="hero__scroll-indicator">
-            <span style="font-size: 10px; text-transform: uppercase; letter-spacing: 2px;">Scroll</span>
-            <i class="fas fa-chevron-down"></i>
+        <div class="hero-title-wrap reveal">
+            <div class="kicker-pill">Strategic Vision</div>
+            <h1>Dismantling Inequality.<br><span class="italic-accent">A 25-Year Vision</span> in Motion.</h1>
+            <p style="font-size: 20px; color: var(--text-muted); max-width: 600px; margin: 0 auto 40px;">
+                We convert ambition into focused action. Transforming Corporate Social Investment frameworks across the continent.
+            </p>
+            <a href="#" class="btn btn-primary">
+                Discover our methodology
+                <div class="icon-circle"><i class="fas fa-arrow-right" style="color: var(--bg-dark); font-size: 12px;"></i></div>
+            </a>
         </div>
     </section>
 
+    <!-- Editorial Split -->
+    <section class="editorial-split">
+        <div class="editorial-content reveal">
+            <span class="kicker">Our Approach</span>
+            <h2>We tackle global challenges through <span class="italic-accent">structured insight</span>.</h2>
+            <p>Our commitment to measurable change starts with a radical rethink of current frameworks. Sustainability is no longer a choice; it's the foundation of any enduring legacy.</p>
+            <a href="#" class="btn btn-outline">
+                Read the Manifesto
+                <div class="icon-circle"><i class="fas fa-arrow-right" style="color: var(--text-main); font-size: 12px;"></i></div>
+            </a>
+        </div>
+        <div class="editorial-img reveal" style="transition-delay: 0.2s;">
+            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=1200&fit=crop" alt="Leadership">
+        </div>
+    </section>
+
+    <!-- Horizontal Testimonials (Rechtdoorzee Style) -->
+    <section class="testimonial-section">
+        <div class="testimonial-header reveal">
+            <div>
+                <span class="kicker">Customer experiences</span>
+                <h2>Experiences of our partners</h2>
+            </div>
+            <div class="slider-controls">
+                <button class="slider-btn" onclick="slideTestimonial(-1)"><i class="fas fa-chevron-left"></i></button>
+                <button class="slider-btn" onclick="slideTestimonial(1)"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+
+        <div class="testimonial-slider-wrapper">
+            <div class="testimonial-track" id="testiTrack">
+                <!-- Card 1 -->
+                <div class="testimonial-card">
+                    <p class="testimonial-quote">"Working with Simphiwe has transformed how we approach community investment. His vision for 2052 isn't just a dream—it's a roadmap that we are actively building today."</p>
+                    <div class="testimonial-author">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop" alt="Johan" class="author-img">
+                        <div class="author-info">
+                            <h4>Johan de Vries</h4>
+                            <p>Founder, Green Impact SA</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 2 -->
+                <div class="testimonial-card">
+                    <p class="testimonial-quote">"The clarity of thought and the systemic approach to solving inequality is what sets Simphiwe apart. His ability to connect strategy with grassroots impact is revolutionary."</p>
+                    <div class="testimonial-author">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&h=150&fit=crop" alt="Sarah" class="author-img">
+                        <div class="author-info">
+                            <h4>Sarah Nkosi</h4>
+                            <p>Director of Sustainability, TechAfrica</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 3 -->
+                <div class="testimonial-card">
+                    <p class="testimonial-quote">"A deep dive into the socio-economic realities of Africa. The podcast alone has reshaped our board's approach to ESG reporting."</p>
+                    <div class="testimonial-author">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&h=150&fit=crop" alt="Michael" class="author-img">
+                        <div class="author-info">
+                            <h4>Michael Ndlovu</h4>
+                            <p>CEO, Pan-African Ventures</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Massive CTA Footer -->
+    <section class="massive-cta reveal">
+        <span class="kicker">Ready to engage?</span>
+        <h2><span class="italic-accent">Shape the</span> Future</h2>
+        <a href="#" class="btn btn-primary" style="padding: 20px 40px; font-size: 18px;">
+            Book a Consultation
+            <div class="icon-circle"><i class="fas fa-arrow-right" style="color: var(--bg-dark);"></i></div>
+        </a>
+    </section>
+
     <script>
-        const slides = document.querySelectorAll('.hero-slide');
-        const tabs = document.querySelectorAll('.hero-tab');
-        const progressBars = document.querySelectorAll('.tab-progress');
-        let currentSlide = 0;
-        let slideInterval;
-        let progressInterval;
-        let startTime;
-        const duration = 6000;
+        // Scroll Reveal Logic
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
 
-        function startSlider() {
-            startTime = Date.now();
-            updateProgress();
-            slideInterval = setInterval(nextSlide, duration);
-        }
-
-        function updateProgress() {
-            if (progressInterval) clearInterval(progressInterval);
-            progressInterval = setInterval(() => {
-                const elapsed = Date.now() - startTime;
-                const progress = Math.min((elapsed / duration) * 100, 100);
-                if (progressBars[currentSlide]) {
-                    progressBars[currentSlide].style.width = progress + '%';
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
                 }
-            }, 50);
-        }
-
-        function showSlide(index) {
-            slides.forEach((slide, i) => {
-                slide.classList.remove('active');
-                tabs[i].classList.remove('active');
-                progressBars[i].style.width = '0%';
             });
-            slides[index].classList.add('active');
-            tabs[index].classList.add('active');
-            currentSlide = index;
-            startTime = Date.now();
-            updateProgress();
-            clearInterval(slideInterval);
-            slideInterval = setInterval(nextSlide, duration);
-        }
+        }, observerOptions);
 
-        function nextSlide() {
-            let next = (currentSlide + 1) % slides.length;
-            showSlide(next);
-        }
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-        tabs.forEach((tab, index) => {
-            tab.addEventListener('click', () => showSlide(index));
+        // Floating Header Logic
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('mainHeader');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
         });
 
-        startSlider();
+        // Testimonial Slider Logic
+        const track = document.getElementById('testiTrack');
+        let currentSlide = 0;
+        const totalSlides = 3;
+
+        function slideTestimonial(direction) {
+            currentSlide += direction;
+            if (currentSlide < 0) currentSlide = 0;
+            // Prevent scrolling past the last full card (viewport math simplified)
+            if (currentSlide >= totalSlides - 1) currentSlide = totalSlides - 1; 
+
+            // Calculate width including gap
+            const cardWidth = track.children[0].offsetWidth;
+            const gap = 30;
+            const translation = currentSlide * (cardWidth + gap);
+            
+            track.style.transform = `translateX(-${translation}px)`;
+        }
+        
+        // Initial load animations trigger
+        setTimeout(() => {
+            document.querySelector('.hero-title-wrap').classList.add('active');
+        }, 100);
+
+        // Dynamic Hero Image Crossfade
+        const heroSlides = document.querySelectorAll('.hero-slide');
+        let currentHeroSlide = 0;
+        if (heroSlides.length > 1) {
+            setInterval(() => {
+                heroSlides[currentHeroSlide].classList.remove('active');
+                currentHeroSlide = (currentHeroSlide + 1) % heroSlides.length;
+                heroSlides[currentHeroSlide].classList.add('active');
+            }, 4500); // Crossfade every 4.5 seconds
+        }
     </script>
 </body>
 </html>
